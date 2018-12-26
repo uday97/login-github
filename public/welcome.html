@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+	<title>Hello</title>
+</head>
+
+<body>
+    <p id="myText">Hello:  <span id="myText"></span><p>
+</body>
+<script>
+	const query = window.location.search.substring(1)
+	const token = query.split('access_token=')[1]
+
+	fetch('//api.github.com/user',{mode : 'cors'}, {
+			headers: {
+				Authorization: 'token ' + token
+			}
+		})
+		.then(res => res.json())
+		.then(res => {
+            const nameNode = document.createTextNode(`Welcome, ${res.name}`)
+            fetch(`https://api.github.com/users/${res.login}/repos`,{
+                headers: {
+				Authorization: 'token ' + token
+                }   
+            })
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res);    
+            })
+            console.log(res);
+            document.body.appendChild(nameNode)
+            document.getElementById("myText").innerHTML = "dasdasd";
+		})
+</script>
+</html>
