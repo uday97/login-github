@@ -18,7 +18,6 @@
 		})
 		.then(res => res.json())
 		.then(res => {
-            const nameNode = document.createTextNode(`Welcome, ${res.name}`)
             fetch(`https://api.github.com/users/${res.login}/repos`,{
                 headers: {
 				Authorization: 'token ' + token
@@ -29,8 +28,7 @@
                 console.log(res);    
             })
             console.log(res);
-            document.body.appendChild(nameNode)
-            document.getElementById("myText").innerHTML = "dasdasd";
+            document.getElementById("myText").innerHTML = res;
 		})
 </script>
 </html>
